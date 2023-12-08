@@ -18,11 +18,24 @@ namespace ShapesLibrary
             return new Circle(radius);
         }
 
+        /// <summary>
+        /// Создать треугольник.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public Triangle CreateTriangle(double a, double b, double c)
         {
             return new Triangle(a, b, c);
         }
 
+        /// <summary>
+        /// Создать прямоугольный треугольник.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public Triangle CreateRectangularTriangle(double a, double b)
         {
             return new Triangle(a, b);

@@ -4,11 +4,11 @@
     {
         public Triangle(double a, double b, double c)
         {
-            if (a == default)
+            if (a < 0)
                 throw new ArgumentException(nameof(a));
-            if (b == default)
+            if (b < 0)
                 throw new ArgumentException(nameof(b));
-            if (c == default)
+            if (c < 0)
                 throw new ArgumentException(nameof(c));
 
             if (a + b <= c || a + c <= b || b + c <= a)
@@ -27,9 +27,9 @@
         /// <exception cref="ArgumentException"></exception>
         public Triangle(double a, double b)
         {
-            if (a == default)
+            if (a < 0)
                 throw new ArgumentException(nameof(a));
-            if (b == default)
+            if (b < 0)
                 throw new ArgumentException(nameof(b));
             
             var c = Math.Sqrt(a * a + b * b);
@@ -40,10 +40,19 @@
             A = a;
             B = b;
             C = c;
-            IsRectangular = true;
         }
 
-        private bool IsRectangular { get; set; }
+        public bool? IsRectangular 
+        {
+            get
+            {
+                if (_isRectangular == null)
+                    return (A * A + B * B == C * C) || (A * A + C * C == B * B) || (C * C + B * B == A * A);
+
+                return _isRectangular;
+            }
+        }
+        private bool? _isRectangular;
         public double A
         {
             get
@@ -55,7 +64,8 @@
                 if (_a == value)
                     return;
 
-                _a = value; 
+                _a = value;
+                base.FigureChanged();
             }
         }
 
@@ -106,8 +116,14 @@
             return A + B + C;
         }
 
+        protected override void FigureChanged()
+        {
+            base.FigureChanged();
+            _isRectangular = null;
+        }
+
         public override bool Equals(object obj) => obj is Triangle triangle 
             && A == triangle?.A && B == triangle?.B && C == triangle?.C;
-        public override int GetHashCode() => 598075851 + A.GetHashCode();
+        public override int GetHashCode() => A.GetHashCode();
     }
 }

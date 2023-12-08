@@ -26,7 +26,7 @@
 
         protected double? _perimeter;
 
-        protected void FigureChanged()
+        protected virtual void FigureChanged()
         {
             _square = null;
             _perimeter = null;

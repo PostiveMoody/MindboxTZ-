@@ -40,6 +40,6 @@
         private double _radius;
 
         public override bool Equals(object obj) => obj is Circle circle && Radius == circle?.Radius;
-        public override int GetHashCode() => 598075851 + Radius.GetHashCode();
+        public override int GetHashCode() => Radius.GetHashCode();
     }
 }
